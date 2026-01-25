@@ -72,22 +72,14 @@ export class UsuarioComponent {
   }
 
   borrarEstudiante(estudiante: any) {
-    if (!confirm('¿Estás seguro de que deseas eliminar este estudiante? Esta acción no se puede deshacer.')) {
-      return;
-    }
-
     if (this.estudianteId) {
       this.isDeleting = true;
       this.backendService.deleteEstudiante(this.estudianteId).subscribe({
         next: (response) => {
           console.log("estudiante borrado");
-          this.isDeleting = false;
+          // Mantener isDeleting = true para que el modal muestre el color rojo
           this.notificationService.showSuccess('Estudiante eliminado exitosamente');
           this.openModal();
-          // Redirigir después de 1 segundo
-          setTimeout(() => {
-            this.router.navigate(['/lista_estudiantes']);
-          }, 1000);
         },
         error: (error) => {
           console.error("error al borrar", error);
@@ -99,36 +91,48 @@ export class UsuarioComponent {
     }
   }
 
+  // Método para cerrar el modal y redirigir a la lista de estudiantes
+  closeModalAndRedirect(): void {
+    this.closeModal();
+    // Redirigir a la lista de estudiantes después de cerrar el modal
+    this.router.navigate(['/lista_estudiantes']);
+    // Resetear isDeleting después de redirigir
+    this.isDeleting = false;
+  }
+
   editarEstudiante(estudiante: any) {
 
 
 
     this.isEditing = true;
   }
-guardarCambios(estudiante: any) {
-  if (this.estudianteId) {
-    this.isSaving = true;
-    // Enviamos tanto el id como los datos completos del estudiante
-    this.backendService.actualizarEstudiante(this.estudianteId, estudiante).subscribe({
-      next: (response) => {
-        console.log("Estudiante actualizado", response);
-        this.isSaving = false;
-        this.isEditing = false;
-        this.notificationService.showSuccess('Estudiante actualizado exitosamente');
-        // Recargar datos del estudiante
-        this.ngOnInit();
-      },
-      error: (error) => {
-        console.error("Error al actualizar", error);
-        this.isSaving = false;
-        const errorMessage = error?.message || 'Error al actualizar el estudiante. Por favor, intenta nuevamente.';
-        this.notificationService.showError(errorMessage);
-      }
-    });
-  } else {
-    this.isEditing = false;
+  guardarCambios(estudiante: any) {
+    if (this.estudianteId) {
+      this.isSaving = true;
+      // Enviamos tanto el id como los datos completos del estudiante
+      this.backendService.actualizarEstudiante(this.estudianteId, estudiante).subscribe({
+        next: (response) => {
+          console.log("Estudiante actualizado", response);
+          this.isSaving = false;
+          this.isEditing = false;
+          this.notificationService.showSuccess('Estudiante actualizado exitosamente');
+          this.openModal();
+          // Recargar datos del estudiante después de cerrar el modal
+          setTimeout(() => {
+            this.ngOnInit();
+          }, 1000);
+        },
+        error: (error) => {
+          console.error("Error al actualizar", error);
+          this.isSaving = false;
+          const errorMessage = error?.message || 'Error al actualizar el estudiante. Por favor, intenta nuevamente.';
+          this.notificationService.showError(errorMessage);
+        }
+      });
+    } else {
+      this.isEditing = false;
+    }
   }
-}
 
 
 

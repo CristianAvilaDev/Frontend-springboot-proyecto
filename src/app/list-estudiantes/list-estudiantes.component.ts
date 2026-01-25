@@ -50,15 +50,21 @@ export class ListEstudiantesComponent implements OnInit {
   refrescarDatos(): void {
     this.obtenerDatosTOdosLosUsuarios();
   }
+
+  // Método para ordenar por fecha de registro (más reciente primero)
+  ordenarPorFechaRegistro(): void {
+    this.sortBy = 'id-desc'; // Asumiendo que el ID incrementa con cada registro
+    this.aplicarFiltrosYOrdenamiento();
+  }
 verMasEstudiante(estudiante: any): void {
   console.log(estudiante.studentId);  // Imprime el ID del estudiante
 }
 
 
   // Obtiene todos los estudiantes desde el backend
-  private obtenerDatosTOdosLosUsuarios(): void {
+  private obtenerDatosTOdosLosUsuarios(forceRefresh: boolean = false): void {
     this.isLoading = true;
-    this.backendService.getDatosTOdosUsuarios().subscribe({
+    this.backendService.getDatosTOdosUsuarios(forceRefresh).subscribe({
       next: (response) => {
         this.datosTodosEstudiantes = response;
         console.log('Datos recibidos de todos los estudiantes:', this.datosTodosEstudiantes);

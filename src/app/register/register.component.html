@@ -24,6 +24,7 @@
           [class.is-valid]="formFirstName && !errors.firstName"
           (blur)="validateField('firstName')"
           (input)="validateField('firstName')"
+          autocomplete="given-name"
           required>
         <div class="invalid-feedback" *ngIf="errors.firstName">
           {{ errors.firstName }}
@@ -36,7 +37,8 @@
           id="inputLastName" 
           [(ngModel)]="formLastName" 
           name="formLastName" 
-          class="form-control">
+          class="form-control"
+          autocomplete="family-name">
       </div>
       <div class="mb-3">
         <label for="inputEmail" class="form-label">
@@ -52,6 +54,7 @@
           [class.is-valid]="formEmail && !errors.email"
           (blur)="validateField('email')"
           (input)="validateField('email')"
+          autocomplete="email"
           required>
         <div class="invalid-feedback" *ngIf="errors.email">
           {{ errors.email }}
@@ -72,19 +75,31 @@
   </div>
 </div>
 
-<!-- Modal de éxito -->
-<div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registro Exitoso</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+<!-- Modal de éxito mejorado -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-success text-white border-0">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i class="fa fa-check-circle me-2"></i>Registro Exitoso
+        </h5>
+        <button type="button" class="btn-close btn-close-white" (click)="closeModal()"></button>
       </div>
-      <div class="modal-body">
-        ¡El registro fue exitoso!
+      <div class="modal-body text-center py-4">
+        <div class="mb-3">
+          <i class="fa fa-user-plus fa-3x text-success"></i>
+        </div>
+        <h6 class="text-success mb-2">¡Estudiante registrado correctamente!</h6>
+        <p class="text-muted mb-0">Nombre: <strong>{{ formFirstName }} {{ formLastName }}</strong></p>
+        <p class="text-muted mb-0">Email: <strong>{{ formEmail }}</strong></p>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" routerLink="/inicio" (click)="closeModal()">Aceptar</button>
+      <div class="modal-footer border-0 justify-content-center">
+        <button type="button" class="btn btn-outline-secondary me-2" (click)="closeModal()">
+          <i class="fa fa-times"></i> Cerrar
+        </button>
+        <button type="button" class="btn btn-success" (click)="closeModal()">
+          <i class="fa fa-check"></i> Aceptar
+        </button>
       </div>
     </div>
   </div>

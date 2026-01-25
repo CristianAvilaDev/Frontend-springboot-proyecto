@@ -22,6 +22,14 @@
               </span>
             </p>
           </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary btn-sm" (click)="refrescarDatos()" title="Refrescar datos">
+              <i class="fa fa-refresh"></i> Refrescar
+            </button>
+            <button class="btn btn-outline-success btn-sm" (click)="ordenarPorFechaRegistro()" title="Ordenar por fecha de registro">
+              <i class="fa fa-clock-o"></i> Más recientes
+            </button>
+          </div>
           
           <!-- Botones de exportación agrupados -->
           <div class="export-buttons">

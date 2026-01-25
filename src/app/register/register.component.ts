@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 import { NotificationService } from '../services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: false,
@@ -26,7 +27,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private backendService: BackendService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   // Método para abrir el modal
@@ -123,11 +125,13 @@ export class RegisterComponent implements OnInit {
         console.log('Respuesta del backend:', response);
         this.isSubmitting = false;
         this.openModal();
-        // Limpiar formulario después del éxito
-        this.formFirstName = '';
-        this.formLastName = '';
-        this.formEmail = '';
-        this.password = '';
+        // Limpiar caché para forzar la actualización de datos
+        this.backendService.clearCache();
+        // No limpiar formulario después del éxito para que el modal muestre los datos
+        // this.formFirstName = '';
+        // this.formLastName = '';
+        // this.formEmail = '';
+        // this.password = '';
         this.errors = { firstName: '', email: '' };
       },
       error: (error) => {
@@ -137,6 +141,15 @@ export class RegisterComponent implements OnInit {
         this.notificationService.showError('Error al registrar estudiante. Por favor, intenta nuevamente.');
       }
     });
+  }
+
+  // Método para cerrar el modal y redirigir a la lista de estudiantes
+  closeModalAndRedirect(): void {
+    this.closeModal();
+    // Limpiar caché para forzar la recarga de datos
+    this.backendService.clearCache();
+    // Redirigir a la lista de estudiantes
+    this.router.navigate(['/list-estudiantes']);
   }
 
 

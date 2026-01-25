@@ -67,20 +67,41 @@
 </div>
 
 
-<!-- Modal de éxito -->
-<div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Eliminación exitosa</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+<!-- Modal de éxito mejorado -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      <!-- Encabezado según operación -->
+      <div class="modal-header border-0" [ngClass]="{'bg-danger text-white': isDeleting, 'bg-warning text-dark': !isDeleting}">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i class="fa me-2" [ngClass]="{'fa-trash text-white': isDeleting, 'fa-edit text-dark': !isDeleting}"></i>
+          <span *ngIf="isDeleting">Eliminación Exitosa</span>
+          <span *ngIf="!isDeleting">Actualización Exitosa</span>
+        </h5>
+        <button type="button" class="btn-close" [ngClass]="{'btn-close-white': isDeleting}" (click)="closeModal()"></button>
       </div>
-      <div class="modal-body">
-        ¡Usuario eliminado!
+      
+      <!-- Cuerpo según operación -->
+      <div class="modal-body text-center py-4">
+        <div class="mb-3">
+          <i class="fa fa-3x" [ngClass]="{'fa-trash fa-3x text-danger': isDeleting, 'fa-edit fa-3x text-warning': !isDeleting}"></i>
+        </div>
+        <h6 class="mb-2" [ngClass]="{'text-danger': isDeleting, 'text-warning': !isDeleting}">
+          <span *ngIf="isDeleting">¡Estudiante eliminado correctamente!</span>
+          <span *ngIf="!isDeleting">¡Estudiante actualizado correctamente!</span>
+        </h6>
+        <p class="text-muted mb-0">Nombre: <strong>{{ estudiante.firstName }} {{ estudiante.lastName }}</strong></p>
+        <p class="text-muted mb-0">Email: <strong>{{ estudiante.email }}</strong></p>
       </div>
-      <div class="modal-footer">
-        <!-- Botón Aceptar que redirige a la página de inicio -->
-        <button type="button" class="btn btn-primary" routerLink="/inicio" (click)="closeModal()">Aceptar</button>
+      
+      <!-- Pie de página según operación -->
+      <div class="modal-footer border-0 justify-content-center">
+        <button type="button" class="btn btn-outline-secondary me-2" (click)="closeModal()">
+          <i class="fa fa-times"></i> Cerrar
+        </button>
+        <button type="button" class="btn" [ngClass]="{'btn-danger': isDeleting, 'btn-warning': !isDeleting}" (click)="closeModalAndRedirect()">
+          <i class="fa" [ngClass]="{'fa-check': isDeleting, 'fa-save': !isDeleting}"></i> Aceptar
+        </button>
       </div>
     </div>
   </div>
