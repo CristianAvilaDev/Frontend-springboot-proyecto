@@ -1,0 +1,91 @@
+<!-- Sección de Registro -->
+
+<header class="header text-white text-center py-5">
+  <h1>Añadir Usuario</h1>
+  <p>En el formulario desplegado a continuación, puedes añadir un nuevo estudiante a nuestra base de datos.</p>
+</header>
+
+<!-- Formulario de registro -->
+<div class="container">
+  <div class="form-container">
+    <h2>Formulario de Registro</h2>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <div class="mb-3">
+        <label for="inputFirstName" class="form-label">
+          Primer Nombre: <span class="text-danger">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="inputFirstName" 
+          [(ngModel)]="formFirstName" 
+          name="nombreUsuario" 
+          class="form-control"
+          [class.is-invalid]="errors.firstName"
+          [class.is-valid]="formFirstName && !errors.firstName"
+          (blur)="validateField('firstName')"
+          (input)="validateField('firstName')"
+          required>
+        <div class="invalid-feedback" *ngIf="errors.firstName">
+          {{ errors.firstName }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="inputLastName" class="form-label">Segundo Nombre:</label>
+        <input 
+          type="text" 
+          id="inputLastName" 
+          [(ngModel)]="formLastName" 
+          name="formLastName" 
+          class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label">
+          Correo Electrónico: <span class="text-danger">*</span>
+        </label>
+        <input 
+          type="email" 
+          id="inputEmail" 
+          [(ngModel)]="formEmail" 
+          name="formEmail" 
+          class="form-control"
+          [class.is-invalid]="errors.email"
+          [class.is-valid]="formEmail && !errors.email"
+          (blur)="validateField('email')"
+          (input)="validateField('email')"
+          required>
+        <div class="invalid-feedback" *ngIf="errors.email">
+          {{ errors.email }}
+        </div>
+      </div>
+      <button 
+        type="submit" 
+        class="btn btn-info w-100"
+        [disabled]="isSubmitting || !formFirstName.trim() || !formEmail.trim() || errors.firstName || errors.email">
+        <span *ngIf="!isSubmitting">
+          <i class="fa fa-paper-plane"></i> Enviar
+        </span>
+        <span *ngIf="isSubmitting">
+          <i class="fa fa-spinner fa-spin"></i> Enviando...
+        </span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal de éxito -->
+<div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro Exitoso</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        ¡El registro fue exitoso!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" routerLink="/inicio" (click)="closeModal()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

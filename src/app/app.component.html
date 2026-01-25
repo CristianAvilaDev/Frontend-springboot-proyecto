@@ -1,0 +1,147 @@
+<!-- Menú de navegación -->
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm" role="navigation" aria-label="Navegación principal">
+  <div class="container">
+    <a 
+      class="navbar-brand" 
+      routerLink="/" 
+      style="font-family: 'Poppins', sans-serif; font-weight: 600; color: white;"
+      aria-label="Ir a página de inicio"
+      tabindex="0">
+      <i class="fa fa-cogs" aria-hidden="true"></i> Frontend-springboot-proyecto
+    </a>
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNav" 
+      aria-controls="navbarNav" 
+      aria-expanded="false" 
+      aria-label="Alternar menú de navegación"
+      tabindex="0">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto" role="menubar">
+        <li class="nav-item" role="none">
+          <a 
+            class="nav-link" 
+            routerLink="/inicio"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: false}"
+            style="font-family: 'Poppins', sans-serif; font-weight: 500;"
+            role="menuitem"
+            aria-label="Ir a página de inicio"
+            tabindex="0">
+            <i class="fa fa-home" aria-hidden="true"></i> <span>Inicio</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a 
+            class="nav-link" 
+            routerLink="/registrar"
+            routerLinkActive="active"
+            style="font-family: 'Poppins', sans-serif; font-weight: 500;"
+            role="menuitem"
+            aria-label="Ir a página de registro"
+            tabindex="0">
+            <i class="fa fa-user-plus" aria-hidden="true"></i> <span>Registrar</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a 
+            class="nav-link" 
+            routerLink="/lista_estudiantes"
+            routerLinkActive="active"
+            style="font-family: 'Poppins', sans-serif; font-weight: 500;"
+            role="menuitem"
+            aria-label="Ver lista de estudiantes"
+            tabindex="0">
+            <i class="fa fa-users" aria-hidden="true"></i> <span>Estudiantes</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Componente de notificaciones -->
+<app-notification></app-notification>
+
+<!-- Lugar donde se cargarán dinámicamente los componentes -->
+<router-outlet></router-outlet>
+
+<!-- Llamado a la acción -->
+<section class="cta text-center py-5">
+  <div class="container">
+    <h2 class="fw-bold text-white">Únete a nosotros</h2>
+    <p class="text-white">No pierdas la oportunidad de formar parte de nuestra comunidad.</p>
+    <button class="btn btn-light btn-lg mt-3">Empieza Ahora</button>
+  </div>
+</section>
+
+
+
+
+
+<!-- Sección de contacto y redes sociales -->
+<section class="contact-section">
+  <div class="container-fluid"> <!-- Contenedor que ocupa todo el ancho -->
+    <div class="row"> <!-- Fila para el título -->
+      <div class="col-12 text-center">
+        <h2>¡Contáctanos!</h2>
+        <p>¿Tienes alguna pregunta o comentario? No dudes en ponerte en contacto con nosotros.</p>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="social-media row justify-content-center mt-4">
+      <h3>Síguenos en nuestras redes sociales</h3>
+      <div class="social-icons" role="list">
+        <a 
+          href="#" 
+          class="social-icon facebook" 
+          role="listitem"
+          aria-label="Síguenos en Facebook"
+          tabindex="0">
+          <i class="fab fa-facebook" aria-hidden="true"></i>
+        </a>
+        <a 
+          href="#" 
+          class="social-icon twitter" 
+          role="listitem"
+          aria-label="Síguenos en Twitter"
+          tabindex="0">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+        <a 
+          href="#" 
+          class="social-icon instagram" 
+          role="listitem"
+          aria-label="Síguenos en Instagram"
+          tabindex="0">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a 
+          href="#" 
+          class="social-icon linkedin" 
+          role="listitem"
+          aria-label="Síguenos en LinkedIn"
+          tabindex="0">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Pie de página -->
+<footer class="footer text-center text-white py-4">
+  <p>&copy; 2025 Todos los derechos reservados | <a href="#" class="text-white fw-bold">Términos y condiciones</a></p>
+</footer>
+

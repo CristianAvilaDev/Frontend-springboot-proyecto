@@ -1,0 +1,87 @@
+<header class="header text-white text-center py-5">
+  <h1 class="fw-bold">Detalles del Estudiante</h1>
+  <p class="lead">Gestiona la información del estudiante</p>
+</header>
+
+<div class="container mt-4">
+  <!-- Loading spinner -->
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p class="mt-3 text-muted">Cargando información del estudiante...</p>
+  </div>
+
+  <div class="card shadow-sm mb-4" *ngIf="!isLoading && estudiante">
+    <div class="card-body">
+      <h5 class="card-title text-center mb-3">Estudiante</h5>
+    <p><strong>Primer Nombre:</strong>
+      <span *ngIf="!isEditing">{{ estudiante.firstName || 'No disponible' }}</span>
+      <input *ngIf="isEditing" [(ngModel)]="estudiante.firstName" />
+    </p>
+    <p><strong>Segundo Nombre:</strong>
+      <span *ngIf="!isEditing">{{ estudiante.lastName || 'No disponible' }}</span>
+      <input *ngIf="isEditing" [(ngModel)]="estudiante.lastName" />
+    </p>
+    <p><strong>ID:</strong> {{ estudiante.studentId || 'No disponible' }}</p>
+    <p><strong>Email:</strong>
+      <span *ngIf="!isEditing">{{ estudiante.email || 'No disponible' }}</span>
+      <input *ngIf="isEditing" [(ngModel)]="estudiante.email" />
+    </p>
+
+    <!-- Contenedor para los botones -->
+    <div class="d-flex justify-content-around">
+      <button 
+        *ngIf="!isEditing" 
+        (click)="editarEstudiante(estudiante)" 
+        class="btn btn-warning"
+        [disabled]="isDeleting">
+        <i class="fa fa-edit"></i> Editar
+      </button>
+      <button 
+        *ngIf="!isEditing" 
+        (click)="borrarEstudiante(estudiante)" 
+        class="btn btn-danger"
+        [disabled]="isDeleting">
+        <span *ngIf="!isDeleting">
+          <i class="fa fa-trash"></i> Borrar
+        </span>
+        <span *ngIf="isDeleting">
+          <i class="fa fa-spinner fa-spin"></i> Eliminando...
+        </span>
+      </button>
+      <button 
+        *ngIf="isEditing" 
+        (click)="guardarCambios(estudiante)" 
+        class="btn btn-success"
+        [disabled]="isSaving">
+        <span *ngIf="!isSaving">
+          <i class="fa fa-save"></i> Guardar
+        </span>
+        <span *ngIf="isSaving">
+          <i class="fa fa-spinner fa-spin"></i> Guardando...
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal de éxito -->
+<div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminación exitosa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        ¡Usuario eliminado!
+      </div>
+      <div class="modal-footer">
+        <!-- Botón Aceptar que redirige a la página de inicio -->
+        <button type="button" class="btn btn-primary" routerLink="/inicio" (click)="closeModal()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

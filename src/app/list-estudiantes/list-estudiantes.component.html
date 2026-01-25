@@ -1,0 +1,237 @@
+<header class="header text-white text-center py-5">
+  <h1>Lista de Estudiantes</h1>
+  <p>Este es el listado de todos los estudiantes registrados en el sistema en nuestra base de datos. Puedes ver,
+    editar o eliminar haciendo clic en la opción "editar".</p>
+</header>
+
+<!-- Mostrar todos los estudiantes -->
+<div *ngIf="datosTodosEstudiantes && datosTodosEstudiantes.length > 0 && estudiantesFiltrados.length > 0">
+  <div class="container mt-4">
+    <div class="col-12 col-md-10 col-lg-8 p-4 mx-auto content-container">
+      <!-- Header con título y contador -->
+      <div class="page-header mb-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+          <div>
+            <h2 class="mb-1">Lista de Estudiantes</h2>
+            <p class="text-muted small mb-0">
+              <span *ngIf="searchTerm || filterBy !== 'todos'">
+                Mostrando <strong>{{ getTotalFiltrados() }}</strong> de <strong>{{ datosTodosEstudiantes.length }}</strong> estudiantes
+              </span>
+              <span *ngIf="!searchTerm && filterBy === 'todos'">
+                Total: <strong>{{ datosTodosEstudiantes.length }}</strong> estudiantes
+              </span>
+            </p>
+          </div>
+          
+          <!-- Botones de exportación agrupados -->
+          <div class="export-buttons">
+            <div class="btn-group" role="group" aria-label="Opciones de exportación">
+              <button 
+                type="button" 
+                class="btn btn-sm btn-outline-primary" 
+                (click)="exportarCSV()"
+                aria-label="Exportar a CSV"
+                title="Exportar a CSV">
+                <i class="fa fa-download"></i> <span class="d-none d-md-inline">CSV</span>
+              </button>
+              <button 
+                type="button" 
+                class="btn btn-sm btn-outline-success" 
+                (click)="exportarExcel()"
+                aria-label="Exportar a Excel"
+                title="Exportar a Excel">
+                <i class="fa fa-file-excel"></i> <span class="d-none d-md-inline">Excel</span>
+              </button>
+              <button 
+                type="button" 
+                class="btn btn-sm btn-outline-secondary" 
+                (click)="imprimirLista()"
+                aria-label="Imprimir lista"
+                title="Imprimir lista">
+                <i class="fa fa-print"></i> <span class="d-none d-md-inline">Imprimir</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de herramientas compacta -->
+      <div class="toolbar-container mb-4">
+        <div class="row g-2 align-items-end">
+          <!-- Búsqueda -->
+          <div class="col-12 col-md-5">
+            <label for="searchInput" class="form-label small fw-semibold mb-1">
+              <i class="fa fa-search me-1"></i> Buscar
+            </label>
+            <div class="input-group input-group-sm">
+              <input 
+                type="text" 
+                class="form-control" 
+                id="searchInput"
+                [(ngModel)]="searchTerm"
+                (input)="onSearchInput()"
+                placeholder="Nombre, email o ID..."
+                aria-label="Barra de búsqueda">
+              <button 
+                *ngIf="searchTerm" 
+                class="btn btn-outline-secondary" 
+                type="button"
+                (click)="limpiarBusqueda()"
+                aria-label="Limpiar búsqueda"
+                title="Limpiar">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Filtro -->
+          <div class="col-6 col-md-2">
+            <label for="filterBy" class="form-label small fw-semibold mb-1">Filtrar</label>
+            <select 
+              id="filterBy" 
+              class="form-select form-select-sm" 
+              [(ngModel)]="filterBy"
+              (change)="cambiarFiltro()"
+              aria-label="Filtrar por campo">
+              <option value="todos">Todos</option>
+              <option value="nombre">Nombre</option>
+              <option value="email">Email</option>
+              <option value="id">ID</option>
+            </select>
+          </div>
+          
+          <!-- Ordenamiento -->
+          <div class="col-6 col-md-2">
+            <label for="sortBy" class="form-label small fw-semibold mb-1">Ordenar</label>
+            <select 
+              id="sortBy" 
+              class="form-select form-select-sm" 
+              [(ngModel)]="sortBy"
+              (change)="cambiarOrdenamiento()"
+              aria-label="Ordenar por">
+              <option value="nombre-asc">Nombre ↑</option>
+              <option value="nombre-desc">Nombre ↓</option>
+              <option value="email-asc">Email ↑</option>
+              <option value="email-desc">Email ↓</option>
+              <option value="id-asc">ID ↑</option>
+              <option value="id-desc">ID ↓</option>
+            </select>
+          </div>
+          
+          <!-- Items por página -->
+          <div class="col-12 col-md-3">
+            <label for="itemsPerPage" class="form-label small fw-semibold mb-1">Por página</label>
+            <select 
+              id="itemsPerPage" 
+              class="form-select form-select-sm" 
+              [(ngModel)]="itemsPerPage" 
+              (change)="cambiarItemsPorPagina()"
+              aria-label="Items por página">
+              <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }} items</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading spinner -->
+      <div *ngIf="isLoading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-3 text-muted">Cargando estudiantes...</p>
+      </div>
+
+      <div class="row g-4 justify-content-center" *ngIf="!isLoading">
+        <!-- Tarjetas en columnas de 12 en pantallas pequeñas y 6 en pantallas grandes -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4" *ngFor="let estudiante of paginatedEstudiantes">
+          <div class="card shadow-sm mb-4 student-card">
+            <div class="card-body">
+              <h5 class="card-title text-center mb-3">Estudiante</h5>
+              <p><strong>Primer Nombre:</strong> {{ estudiante.firstName || 'No disponible' }}</p>
+              <p><strong>Segundo Nombre:</strong> {{ estudiante.lastName || 'No disponible' }}</p>
+              <p><strong>ID:</strong> {{ estudiante.studentId || 'No disponible' }}</p>
+              <p><strong>Email:</strong> {{ estudiante.email || 'No disponible' }}</p>
+              <a 
+                [routerLink]="['/usuario', estudiante.studentId]" 
+                class="btn btn-info w-100"
+                [attr.aria-label]="'Editar estudiante ' + estudiante.firstName">
+                Editar
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paginación mejorada -->
+      <div class="pagination-container mt-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+          <!-- Información de paginación -->
+          <div class="pagination-info">
+            <span class="text-muted">
+              Mostrando {{ (currentPage - 1) * itemsPerPage + 1 }} - 
+              {{ currentPage * itemsPerPage > estudiantesFiltrados.length ? estudiantesFiltrados.length : currentPage * itemsPerPage }} 
+              de {{ estudiantesFiltrados.length }} estudiantes
+            </span>
+            <span class="text-muted ms-2" *ngIf="totalPages > 0">
+              (Página {{ currentPage }} de {{ totalPages }})
+            </span>
+          </div>
+
+          <!-- Controles de paginación -->
+          <nav aria-label="Navegación de páginas">
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <button 
+                  class="page-link" 
+                  (click)="anteriorPagina()" 
+                  [disabled]="currentPage === 1"
+                  aria-label="Página anterior"
+                  tabindex="0">
+                  <i class="fa fa-chevron-left"></i>
+                </button>
+              </li>
+              
+              <!-- Números de página -->
+              <li 
+                class="page-item" 
+                *ngFor="let pagina of obtenerPaginasParaMostrar()"
+                [class.active]="pagina === currentPage">
+                <button 
+                  class="page-link" 
+                  (click)="irAPagina(pagina)"
+                  [attr.aria-label]="'Ir a página ' + pagina"
+                  [attr.aria-current]="pagina === currentPage ? 'page' : null"
+                  tabindex="0">
+                  {{ pagina }}
+                </button>
+              </li>
+              
+              <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <button 
+                  class="page-link" 
+                  (click)="siguientePagina()" 
+                  [disabled]="currentPage === totalPages"
+                  aria-label="Página siguiente"
+                  tabindex="0">
+                  <i class="fa fa-chevron-right"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mensaje si no hay estudiantes -->
+<div *ngIf="datosTodosEstudiantes.length === 0" class="container mt-5">
+  <div class="text-center empty-state">
+    <i class="fa fa-users fa-4x text-muted mb-3" aria-hidden="true"></i>
+    <h3 class="text-muted">No hay estudiantes disponibles</h3>
+    <p class="text-muted">Comienza registrando un nuevo estudiante.</p>
+    <a routerLink="/registrar" class="btn btn-primary mt-3" aria-label="Ir a registrar estudiante">
+      <i class="fa fa-user-plus"></i> Registrar Estudiante
+    </a>
+  </div>
+</div>

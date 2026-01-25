@@ -1,0 +1,252 @@
+/* Estilo para la navbar con degradado azul profesional */
+.navbar {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
+  padding: 15px 0;
+}
+
+/* Estilo del título de la navbar */
+.navbar-brand {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: white !important;
+  font-size: 1.5rem;
+
+
+}
+
+/* Estilo de los enlaces del menú */
+.navbar-nav .nav-item .nav-link {
+  color: white !important;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 15px;
+  transition: background-color 0.3s;
+}
+
+/* Efecto de hover en los enlaces */
+.navbar-nav .nav-item .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Estilo de la opción activa del navbar - solo cuando realmente está activa */
+.navbar-nav .nav-item .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* Ajuste de responsive para mejorar el navbar en móviles */
+.navbar-toggler {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  padding: 5px 10px;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-toggler-icon {
+  background-color: #ffffff;
+  border-radius: 3px;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5);
+  outline: 3px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Mejoras responsive para navbar */
+@media (max-width: 991px) {
+  .navbar-nav {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .navbar-nav .nav-item {
+    margin-bottom: 5px;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 12px 15px;
+    border-radius: 8px;
+  }
+}
+
+/* Mejoras de accesibilidad - contraste y focus */
+.navbar-nav .nav-link:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.social-icon:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 3px;
+}
+
+
+
+
+/* Llamado a la acción */
+.cta {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
+}
+
+.cta .btn-light {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 12px 30px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.cta .btn-light:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Pie de página */
+.footer {
+  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.footer a {
+  color: #60a5fa !important;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #3b82f6 !important;
+}
+
+
+
+
+
+
+
+/* Estilos para la sección de contacto */
+.contact-section {
+  background-color: #f8f9fa;
+  padding: 30px 20px; /* Reducir el padding superior e inferior */
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 2rem; /* Reducir el tamaño del título */
+  margin-bottom: 15px; /* Reducir el margen inferior */
+  color: #1e40af;
+  font-weight: 700;
+}
+
+.contact-section p {
+  font-size: 1rem; /* Reducir el tamaño del texto */
+  margin-bottom: 30px; /* Reducir el margen inferior */
+  color: #555;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Reducir aún más el espacio entre los cuadros */
+  margin-bottom: 20px; /* Reducir el margen inferior */
+}
+
+.contact-item {
+  background-color: #ffffff;
+  padding: 12px; /* Reducir el padding dentro de los cuadros */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 120px; /* Reducir el ancho de los cuadros */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.contact-item i {
+  font-size: 1.8rem; /* Reducir el tamaño de los iconos */
+  color: #2563eb;
+  margin-bottom: 8px; /* Reducir el espacio debajo del icono */
+}
+
+.contact-item p {
+  font-size: 0.9rem; /* Reducir el tamaño del texto */
+  color: #333;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+/* Estilos para las redes sociales */
+.social-media {
+  margin-top: 20px; /* Reducir el margen superior */
+}
+
+.social-media h3 {
+  font-size: 1.5rem; /* Reducir el tamaño del título */
+  margin-bottom: 15px; /* Reducir el margen inferior */
+  color: #1e40af;
+  font-weight: 700;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Reducir el espacio entre los iconos */
+}
+
+.social-icon {
+  font-size: 2rem; /* Reducir el tamaño de los iconos sociales */
+  color: #fff;
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  padding: 12px; /* Reducir el padding */
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+.social-icon:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 6px 16px rgba(30, 64, 175, 0.4);
+}
+
+/* Estilo responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .contact-info {
+    flex-direction: column;
+    gap: 10px; /* Reducir aún más el espacio entre los cuadros */
+  }
+
+  .contact-item {
+    width: 100%;
+    max-width: 250px; /* Reducir el tamaño máximo de los cuadros */
+    margin: 0 auto;
+  }
+}
+
+

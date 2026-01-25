@@ -1,0 +1,124 @@
+<div class="container-fluid p-0">
+  <!-- Encabezado mejorado -->
+  <header class="header text-white text-center py-5">
+    <h1 class="fw-bold mb-3">Bienvenido a Nuestra Plataforma</h1>
+    <p class="lead mb-4">Gestiona estudiantes de manera fácil y eficiente</p>
+    
+    <!-- Menú de navegación rápida -->
+    <div class="quick-menu container mt-5">
+      <div class="row justify-content-center g-4">
+        <div class="col-12 col-md-5 col-lg-4">
+          <div class="menu-card register-card">
+            <div class="menu-icon">
+              <i class="fa fa-user-plus"></i>
+            </div>
+            <h3 class="menu-title">Registrar Usuario</h3>
+            <p class="menu-description">Añade un nuevo estudiante al sistema</p>
+            <a routerLink="/registrar" class="menu-button">
+              <i class="fa fa-arrow-right"></i> Ir a Registrar
+            </a>
+          </div>
+        </div>
+        <div class="col-12 col-md-5 col-lg-4">
+          <div class="menu-card list-card">
+            <div class="menu-icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <h3 class="menu-title">Ver Lista de Estudiantes</h3>
+            <p class="menu-description">Consulta todos los estudiantes registrados</p>
+            <a routerLink="/lista_estudiantes" class="menu-button">
+              <i class="fa fa-arrow-right"></i> Ver Lista
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sección de estadísticas -->
+  <section class="stats-section py-5">
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-number">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+                <span *ngIf="!isLoading">{{ totalEstudiantes }}</span>
+              </h3>
+              <p class="stat-label">Estudiantes Registrados</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa fa-graduation-cap"></i>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-number">100%</h3>
+              <p class="stat-label">Disponibilidad</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa fa-check-circle"></i>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-number">24/7</h3>
+              <p class="stat-label">Soporte</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de presentación -->
+  <section class="presentation text-center py-5">
+    <div class="container">
+      <h2 class="fw-bold section-title">¿Qué ofrecemos?</h2>
+      <p class="section-subtitle">Nuestra plataforma te brinda soluciones innovadoras para gestionar estudiantes de manera eficiente.</p>
+    </div>
+  </section>
+
+  <!-- Sección con características -->
+  <section class="features text-center py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-box p-4 shadow-lg">
+            <div class="feature-icon">
+              <i class="fa fa-shield-alt"></i>
+            </div>
+            <h3>🔒 Seguridad</h3>
+            <p>Protegemos tus datos con tecnología avanzada.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box p-4 shadow-lg">
+            <div class="feature-icon">
+              <i class="fa fa-rocket"></i>
+            </div>
+            <h3>🚀 Velocidad</h3>
+            <p>Experimenta un rendimiento excepcional y rápido.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box p-4 shadow-lg">
+            <div class="feature-icon">
+              <i class="fa fa-mobile-alt"></i>
+            </div>
+            <h3>📱 Accesibilidad</h3>
+            <p>Adaptado para cualquier dispositivo, en cualquier lugar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

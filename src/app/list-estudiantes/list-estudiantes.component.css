@@ -1,0 +1,303 @@
+/* Encabezado */
+.header {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+  padding: 60px 0;
+  box-shadow: 0 8px 24px rgba(30, 64, 175, 0.2);
+}
+
+/* Contenedor principal */
+.content-container {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+}
+
+/* Header de página */
+.page-header {
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.page-header h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e40af;
+  margin: 0;
+}
+
+/* Contenedor de herramientas compacto */
+.toolbar-container {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.toolbar-container .form-label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.toolbar-container .form-control,
+.toolbar-container .form-select {
+  border: 1px solid #d1d5db;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.toolbar-container .form-control:focus,
+.toolbar-container .form-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+.toolbar-container .input-group .form-control {
+  border-right: none;
+}
+
+.toolbar-container .input-group .btn-outline-secondary {
+  border-left: none;
+  border-color: #d1d5db;
+}
+
+.toolbar-container .input-group .btn-outline-secondary:hover {
+  background-color: #e5e7eb;
+}
+
+/* Botones de exportación */
+.export-buttons .btn-group {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.export-buttons .btn {
+  border-radius: 0;
+  font-size: 0.875rem;
+  padding: 6px 12px;
+}
+
+.export-buttons .btn:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.export-buttons .btn:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+/* Tarjetas de estudiantes */
+.student-card {
+  border: 2px solid #2563eb;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.student-card:hover {
+  transform: translateY(-5px);
+  border-color: #1e40af;
+  box-shadow: 0 8px 16px rgba(30, 64, 175, 0.25);
+}
+
+/* Responsive para toolbar */
+@media (max-width: 768px) {
+  .toolbar-container {
+    padding: 12px;
+  }
+  
+  .toolbar-container .row > div {
+    margin-bottom: 8px;
+  }
+  
+  .page-header {
+    text-align: center;
+  }
+  
+  .export-buttons {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .export-buttons .btn-group {
+    width: 100%;
+  }
+  
+  .export-buttons .btn {
+    flex: 1;
+  }
+}
+
+/* Paginación */
+.pagination-container {
+  padding: 20px 0;
+  border-top: 2px solid #e5e7eb;
+}
+
+.pagination-info {
+  font-size: 0.9rem;
+}
+
+.pagination .page-link {
+  color: #1e40af;
+  border-color: #e5e7eb;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+  background-color: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #1e40af;
+  border-color: #1e40af;
+  color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Estado vacío */
+.empty-state {
+  padding: 60px 20px;
+}
+
+/* Spinner de carga */
+.spinner-border {
+  border-width: 3px;
+}
+
+.spinner-border.text-primary {
+  color: #2563eb !important;
+  border-color: #2563eb transparent transparent transparent;
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+  .content-container {
+    padding: 20px 15px !important;
+  }
+  
+  .pagination-container {
+    flex-direction: column;
+    gap: 15px !important;
+  }
+  
+  .pagination-info {
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  
+  .pagination {
+    justify-content: center;
+  }
+}
+
+/* Mejoras de accesibilidad */
+.page-link:focus,
+.btn:focus,
+.form-select:focus {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Ocultar en impresión */
+@media print {
+  .header,
+  .pagination-container,
+  .items-selector,
+  .btn-outline-primary,
+  .btn-outline-success,
+  .btn-outline-secondary {
+    display: none !important;
+  }
+  
+  .content-container {
+    border: none;
+    box-shadow: none;
+  }
+  
+  .student-card {
+    page-break-inside: avoid;
+  }
+}
+
+
+
+/* Efecto de sombra suave en las tarjetas de estudiantes */
+.card {
+  border: 2px solid #2563eb;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  box-shadow: 0 8px 20px rgba(30, 64, 175, 0.15);
+  transition: all 0.4s ease;
+}
+
+/* Efecto de hover en las tarjetas de estudiantes (al pasar el ratón) */
+.card:hover {
+  transform: translateY(-10px);
+  border-color: #1e40af;
+  box-shadow: 0 12px 28px rgba(30, 64, 175, 0.3);
+}
+
+/* Fondo suave del contenedor */
+.container {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(30, 64, 175, 0.12);
+  border: 2px solid transparent;
+}
+
+/* Estilo del botón de acción en las tarjetas (Ver más) */
+.btn-info {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%) !important;
+  border: none !important;
+  color: white !important;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+.btn-info:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%) !important;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(30, 64, 175, 0.4);
+}
+
+/* Sombra suave para el botón */
+.btn-info:focus, .btn-info:active {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos en las tarjetas */
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e40af;
+  margin-bottom: 20px;
+}
+
+/* Títulos y otros textos */
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #1e40af;
+  text-shadow: 0 2px 4px rgba(30, 64, 175, 0.15);
+}
+
+
+
