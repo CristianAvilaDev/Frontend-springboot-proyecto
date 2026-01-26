@@ -11,8 +11,8 @@ Este repositorio contiene el frontend de FullstackPagina, un proyecto fullstack 
 
 ## Acceso al Frontend:
 
-- **Frontend:** [Ver aplicación](https://frontend-springboot-proyecto.vercel.app/lista_estudiantes)
-- Otro acceso al frontend: [https://inspiratendencias.netlify.app](https://inspiratendencias.netlify.app)
+- **Frontend:** [Ver aplicación]( https://frontend-springboot-proyecto.vercel.app/lista_estudiantes )
+
 
 ## Backend:
 - Repositorio del backend: [Aquí](https://github.com/CristianAvilaDev/FullstackPagina-backend-v1)
