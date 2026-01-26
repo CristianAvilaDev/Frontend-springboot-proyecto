@@ -25,29 +25,11 @@ export class BackendService {
     });
   }
 
-  // Método para obtener todos lo usuarios con caché
-  private estudiantesCache: any[] = [];
-  private cacheTimestamp: number = 0;
-  private cacheDuration: number = 30000; // 30 segundos
-
+  // Método para obtener todos lo usuarios sin caché
   getDatosTOdosUsuarios(forceRefresh: boolean = false): Observable<any[]> {
-    const now = Date.now();
-    
-    // Retornar caché si está disponible y no está expirado
-    if (!forceRefresh && this.estudiantesCache && (now - this.cacheTimestamp) < this.cacheDuration) {
-      return new Observable(observer => {
-        observer.next(this.estudiantesCache);
-        observer.complete();
-      });
-    }
-
-    // Hacer petición y actualizar caché
+    // Hacer petición directamente sin usar caché
     return this.http.get<any[]>(`${this.baseUrl}/api/estudiantes/obtenerEstudiantes`).pipe(
       retry(2), // Reintentar 2 veces en caso de error
-      tap((data: any[]) => {
-        this.estudiantesCache = data;
-        this.cacheTimestamp = now;
-      }),
       catchError(this.handleError)
     );
   }
@@ -82,10 +64,9 @@ export class BackendService {
     return throwError(() => ({ message: errorMessage, status: error.status }));
   }
 
-  // Limpiar caché
+  // Limpiar caché (mantenemos el método pero sin funcionalidad)
   clearCache(): void {
-    this.estudiantesCache = [];
-    this.cacheTimestamp = 0;
+    // Caché desactivado, este método no hace nada
   }
 
 
