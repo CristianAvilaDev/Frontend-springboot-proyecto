@@ -146,10 +146,10 @@
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
           <span class="visually-hidden">Cargando...</span>
         </div>
-        <p class="mt-3 text-muted">Cargando estudiantes...</p>
+        <p class="mt-3 text-muted">Cargando lista de estudiantes...</p>
       </div>
 
-      <div class="row g-4 justify-content-center" *ngIf="!isLoading">
+      <div class="row g-4 justify-content-center" *ngIf="!isLoading && datosTodosEstudiantes.length > 0">
         <!-- Tarjetas en columnas de 12 en pantallas pequeñas y 6 en pantallas grandes -->
         <div class="col-12 col-sm-6 col-md-6 col-lg-4" *ngFor="let estudiante of paginatedEstudiantes">
           <div class="card shadow-sm mb-4 student-card">

@@ -126,7 +126,6 @@ export class RegisterComponent implements OnInit {
         this.isSubmitting = false;
         this.openModal();
         // Limpiar caché para forzar la actualización de datos
-        this.backendService.clearCache();
         // No limpiar formulario después del éxito para que el modal muestre los datos
         // this.formFirstName = '';
         // this.formLastName = '';
@@ -147,7 +146,6 @@ export class RegisterComponent implements OnInit {
   closeModalAndRedirect(): void {
     this.closeModal();
     // Limpiar caché para forzar la recarga de datos
-    this.backendService.clearCache();
     // Redirigir a la lista de estudiantes
     this.router.navigate(['/list-estudiantes']);
   }

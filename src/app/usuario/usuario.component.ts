@@ -117,10 +117,8 @@ export class UsuarioComponent {
           this.isEditing = false;
           this.notificationService.showSuccess('Estudiante actualizado exitosamente');
           this.openModal();
-          // Recargar datos del estudiante después de cerrar el modal
-          setTimeout(() => {
-            this.ngOnInit();
-          }, 1000);
+          // No recargar datos automáticamente para evitar llamadas innecesarias a la BD
+          // El usuario puede volver a la lista de estudiantes si necesita ver los cambios
         },
         error: (error) => {
           console.error("Error al actualizar", error);

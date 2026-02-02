@@ -48,7 +48,9 @@ export class ListEstudiantesComponent implements OnInit {
 
   // Método para refrescar datos (útil después de crear/actualizar/eliminar)
   refrescarDatos(): void {
-    this.obtenerDatosTOdosLosUsuarios();
+    // No refrescar automáticamente para evitar llamadas innecesarias a la BD
+    // El usuario debe recargar manualmente si necesita datos actualizados
+    this.notificationService.showInfo('Para ver cambios recientes, recarga la página manualmente');
   }
 
   // Método para ordenar por fecha de registro (más reciente primero)
@@ -84,6 +86,14 @@ verMasEstudiante(estudiante: any): void {
 
   // Función para aplicar búsqueda, filtros y ordenamiento
   aplicarFiltrosYOrdenamiento(): void {
+    // Evitar procesamiento si no hay datos cargados
+    if (!this.datosTodosEstudiantes || this.datosTodosEstudiantes.length === 0) {
+      this.estudiantesFiltrados = [];
+      this.paginatedEstudiantes = [];
+      this.totalPages = 0;
+      return;
+    }
+
     let resultado = [...this.datosTodosEstudiantes];
     
     // Aplicar búsqueda

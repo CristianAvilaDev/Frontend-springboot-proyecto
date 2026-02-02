@@ -1,8 +1,8 @@
 // BackendService.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { tap, retry, catchError } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs';
+import { tap, retry, catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,16 @@ export class BackendService {
     return this.http.get<any[]>(`${this.baseUrl}/api/estudiantes/obtenerEstudiantes`).pipe(
       retry(2), // Reintentar 2 veces en caso de error
       catchError(this.handleError)
+    );
+  }
+
+  // Verificar disponibilidad del backend
+  checkBackendHealth(): Observable<boolean> {
+    return this.http.get(`${this.baseUrl}/api/estudiantes/obtenerEstudiantes`, { 
+      responseType: 'json'
+    }).pipe(
+      map(() => true),
+      catchError(() => of(false))
     );
   }
 
@@ -64,10 +74,6 @@ export class BackendService {
     return throwError(() => ({ message: errorMessage, status: error.status }));
   }
 
-  // Limpiar caché (mantenemos el método pero sin funcionalidad)
-  clearCache(): void {
-    // Caché desactivado, este método no hace nada
-  }
 
 
 getEstudiante(idEstudiante: string): Observable<any> {
@@ -81,7 +87,6 @@ deleteEstudiante(idEstudiante: string): Observable<any> {
   return this.http.delete(`${this.baseUrl}/api/estudiantes/${idEstudiante}`).pipe(
     tap(() => {
       // Limpiar caché después de eliminar
-      this.clearCache();
     })
   );
 }
@@ -91,7 +96,6 @@ actualizarEstudiante(idEstudiante: string, estudiante: any): Observable<any> {
   return this.http.put(`${this.baseUrl}/api/estudiantes/actualizarEstudiante/${idEstudiante}`, estudiante).pipe(
     tap(() => {
       // Limpiar caché después de actualizar
-      this.clearCache();
     }),
     catchError(this.handleError)
   );

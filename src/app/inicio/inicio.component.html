@@ -56,11 +56,19 @@
         <div class="col-12 col-md-6 col-lg-4">
           <div class="stat-card">
             <div class="stat-icon">
-              <i class="fa fa-graduation-cap"></i>
+              <i class="fa fa-heartbeat" [ngClass]="{'text-success': backendDisponible, 'text-danger': !backendDisponible}"></i>
             </div>
             <div class="stat-content">
-              <h3 class="stat-number">100%</h3>
-              <p class="stat-label">Disponibilidad</p>
+              <h3 class="stat-number">
+                <span *ngIf="isLoadingDisponibilidad" class="spinner-border spinner-border-sm me-2"></span>
+                <span [ngClass]="{'text-success': backendDisponible, 'text-danger': !backendDisponible}">
+                  {{ backendDisponible ? '100%' : '0%' }}
+                </span>
+              </h3>
+              <p class="stat-label">Disponibilidad del Backend</p>
+              <small class="text-muted">
+                {{ backendDisponible ? 'Servidor en línea' : 'Servidor fuera de línea' }}
+              </small>
             </div>
           </div>
         </div>
